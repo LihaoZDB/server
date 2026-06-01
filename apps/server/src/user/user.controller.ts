@@ -11,6 +11,7 @@ import { UserService } from "./user.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import type { UserLogin, UserRegister } from "@en/common/user";
+import { Token } from "@en/common/user";
 
 @Controller("user")
 export class UserController {
@@ -24,5 +25,10 @@ export class UserController {
   @Post("register")
   register(@Body() CreateUserDto: UserRegister) {
     return this.userService.register(CreateUserDto);
+  }
+
+  @Post('refresh-token')
+  refreshToken(@Body() CreateUserDto: Omit<Token, "accessToken">) {
+    return this.userService.refreshToken(CreateUserDto);
   }
 }

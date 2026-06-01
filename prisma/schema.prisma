@@ -30,6 +30,9 @@ model User {
   address         String? // 地址
   password        String // 密码
   avatar          String? // 头像
+  bio             String? // 个人简介
+  isTimingTask    Boolean          @default(false) // 是否开启定时任务
+  timingTaskTime  String?          @default("00:00:00") // 定时任务时间
   wordNumber      Int              @default(0) // 单词数量
   dayNumber       Int              @default(0) // 打卡天数
   createdAt       DateTime         @default(now()) // 创建时间
