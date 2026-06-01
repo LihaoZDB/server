@@ -389,10 +389,6 @@ export type WordBookRecordUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.WordBookRecordScalarWhereInput | Prisma.WordBookRecordScalarWhereInput[]
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type WordBookRecordCreateNestedManyWithoutWordInput = {
   create?: Prisma.XOR<Prisma.WordBookRecordCreateWithoutWordInput, Prisma.WordBookRecordUncheckedCreateWithoutWordInput> | Prisma.WordBookRecordCreateWithoutWordInput[] | Prisma.WordBookRecordUncheckedCreateWithoutWordInput[]
   connectOrCreate?: Prisma.WordBookRecordCreateOrConnectWithoutWordInput | Prisma.WordBookRecordCreateOrConnectWithoutWordInput[]
