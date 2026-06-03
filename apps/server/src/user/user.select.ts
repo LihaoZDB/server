@@ -10,4 +10,17 @@ export const userSelect = {
   avatar: true,
   wordBookRecords: true,
   wordNumber: true,
+  bio: true,
+  isTimingTask: true,
+  timingTaskTime: true,
+};
+
+export const updateUserSelect = {
+  name: true,
+  email: true,
+  address: true,
+  avatar: true,
+  bio: true,
+  isTimingTask: true,
+  timingTaskTime: true,
 };

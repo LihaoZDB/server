@@ -4,3 +4,5 @@ export * from './prisma/prisma.module';
 export * from './prisma/prisma.service';
 export * from './response/response.module';
 export * from './response/response.service';
+export * from './minio/minio.module';
+export * from './minio/minio.service';
