@@ -1,6 +1,11 @@
 import { Injectable, OnModuleInit } from "@nestjs/common";
 import { CreateChatDto } from "./dto/create-chat.dto";
-import { createDeepSeek, createCheckpoint } from "../llm/llm.config";
+import {
+  createDeepSeek,
+  createCheckpoint,
+  createBoChaSearch,
+  createDeepSeekReasoner,
+} from "../llm/llm.config";
 import { PostgresSaver } from "@langchain/langgraph-checkpoint-postgres";
 import { ChatDto, ChatRoleType } from "@en/common/chat";
 import type { AIMessageChunk, ReactAgent } from "langchain";
@@ -11,24 +16,37 @@ import { ResponseService } from "@libs/shared";
 export class ChatService implements OnModuleInit {
   constructor(private readonly responseService: ResponseService) {}
   private checkpointer: PostgresSaver;
-  private agents: Map<ChatRoleType, ReactAgent> = new Map();
 
   async onModuleInit() {
     // 1. 初始化checkpoint
     this.checkpointer = await createCheckpoint(); // 幂等性
-    // 2. 创建多个agent
-    for (const mode of chatMode) {
-      const agent = createAgent({
-        model: createDeepSeek(), // 模型
-        systemPrompt: mode.prompt, // 系统提示词
-        checkpointer: this.checkpointer, // 检查点
-      });
-      this.agents.set(mode.role, agent);
-    }
   }
 
-  streamCompletion(createChatDto: ChatDto) {
-    const agent = this.agents.get(createChatDto.role);
+  async streamCompletion(createChatDto: ChatDto) {
+    const promptObject = chatMode.find(
+      (mode) => mode.role === createChatDto.role,
+    );
+    if (!promptObject) {
+      throw new Error("模式不存在");
+    }
+    // 拿到基础的提示词
+    let prompt = promptObject.prompt;
+    // 如果开启了联网搜索增强提示词
+    if (createChatDto.webSearch) {
+      const webSearchPrompt = await createBoChaSearch(createChatDto.content);
+      prompt += `请根据以下搜索结果回答问题：${webSearchPrompt}(并且返回参你参考的网站名称)，用户问题：${createChatDto.content}`;
+    }
+    // 默认是deepSeek模型
+    let model = createDeepSeek();
+    // 如果开启了深度思考模式使用deepSeekReasoner模型
+    if (createChatDto.deepThink) {
+      model = createDeepSeekReasoner();
+    }
+    const agent = await createAgent({
+      model: model, // 模型
+      systemPrompt: prompt, // 系统提示词
+      checkpointer: this.checkpointer, // 检查点
+    });
     if (!agent) {
       throw new Error("模式不存在");
     }
@@ -55,6 +73,7 @@ export class ChatService implements OnModuleInit {
       list.map((item) => ({
         content: item.content,
         role: item.type,
+        reasoning: item.additional_kwargs?.reasoning_content, // 返回深度思考的内容
       })),
     );
   }

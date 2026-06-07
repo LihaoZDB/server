@@ -1,10 +1,12 @@
-import { Injectable, OnModuleInit } from "@nestjs/common";
+import { Injectable, Logger, OnModuleInit } from "@nestjs/common";
 import * as Minio from "minio";
 import { ConfigService } from "@nestjs/config";
 
 @Injectable()
 export class MinioService implements OnModuleInit {
+  private readonly logger = new Logger(MinioService.name);
   private readonly minioClient: Minio.Client;
+  private isConnected = false;
   constructor(private readonly configService: ConfigService) {
     this.minioClient = new Minio.Client({
       endPoint: this.configService.get<string>("MINIO_ENDPOINT")!,
@@ -41,9 +43,11 @@ export class MinioService implements OnModuleInit {
           }),
         );
       }
+      this.isConnected = true;
+      this.logger.log('MinIO 连接成功');
     } catch (error) {
-      console.error(`[MinioService] MinIO连接失败: ${error.message}`);
-      console.warn('[MinioService] 文件上传功能将不可用，请确保MinIO服务已启动');
+      this.isConnected = false;
+      this.logger.warn(`MinIO 连接失败，文件上传功能将不可用: ${error.message}`);
     }
   }
 

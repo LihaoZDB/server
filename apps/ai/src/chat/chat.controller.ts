@@ -25,8 +25,16 @@ export class ChatController {
     const stream = await this.chatService.streamCompletion(createChatDto);
     for await (const chunk of stream) {
       const [msg] = chunk;
+      // 深度思考返回的的内容不在content中，在additional_kwargs.reasoning_content中
+      const thinkMsg = msg.additional_kwargs?.reasoning_content;
+      if (thinkMsg) {
+        res.write(
+          `data: ${JSON.stringify({ content: thinkMsg, role: "ai", type: "reasoning" })}\n\n`,
+        );
+      }
+      const content = msg.content ?? "";
       res.write(
-        `data: ${JSON.stringify({ content: msg.content, role: "ai" })}\n\n`,
+        `data: ${JSON.stringify({ content: msg.content, role: "ai", type: "chat" })}\n\n`,
       );
     }
     res.end();
