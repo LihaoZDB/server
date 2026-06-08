@@ -5,6 +5,7 @@ import { ResponseModule } from "./response/response.module";
 import { JwtModule } from "@nestjs/jwt";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { MinioModule } from "./minio/minio.module";
+import { PayModule } from './pay/pay.module';
 
 @Global()
 @Module({
@@ -16,6 +17,7 @@ import { MinioModule } from "./minio/minio.module";
     JwtModule,
     ConfigModule,
     MinioModule,
+    PayModule
   ],
   imports: [
     PrismaModule,
@@ -35,6 +37,7 @@ import { MinioModule } from "./minio/minio.module";
       },
     }),
     MinioModule,
+    PayModule,
   ],
 })
 export class SharedModule {}

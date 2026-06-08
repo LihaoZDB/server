@@ -31,15 +31,20 @@
     "@nestjs/jwt": "^11.0.2",
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^11.0.1",
+    "@nestjs/platform-socket.io": "^11.1.24",
+    "@nestjs/websockets": "^11.1.24",
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "@types/multer": "^2.1.0",
+    "alipay-sdk": "^4.14.0",
     "dotenv": "^17.4.2",
     "langchain": "^1.4.2",
     "minio": "^8.0.7",
+    "nanoid": "^5.1.11",
     "prisma": "^7.8.0",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "socket.io": "^4.8.3"
   },
   "devDependencies": {
     "@nestjs/cli": "^11.0.0",
