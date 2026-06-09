@@ -4,9 +4,10 @@ import { AiService } from "./ai.service";
 import { ChatModule } from "./chat/chat.module";
 import { PromptModule } from "./prompt/prompt.module";
 import { SharedModule } from "@libs/shared";
+import { DigestModule } from './digest/digest.module';
 
 @Module({
-  imports: [ChatModule, PromptModule, SharedModule],
+  imports: [ChatModule, PromptModule, SharedModule, DigestModule],
   controllers: [AiController],
   providers: [AiService],
 })

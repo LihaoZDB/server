@@ -9,9 +9,10 @@ import { AuthModule } from './auth/auth.module';
 import { CourseModule } from './course/course.module';
 import { PayModule } from './pay/pay.module';
 import { SocketModule } from './socket/socket.module';
+import { LearnModule } from './learn/learn.module';
 
 @Module({
-  imports: [UserModule, SharedModule, WordBookModule, AuthModule, CourseModule, PayModule, SocketModule],
+  imports: [UserModule, SharedModule, WordBookModule, AuthModule, CourseModule, PayModule, SocketModule, LearnModule],
   controllers: [AppController],
   providers: [AppService, AuthService],
 })
