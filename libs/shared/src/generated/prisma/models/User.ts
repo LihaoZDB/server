@@ -303,6 +303,7 @@ export type UserWhereInput = {
   wordBookRecords?: Prisma.WordBookRecordListRelationFilter
   paymentRecords?: Prisma.PaymentRecordListRelationFilter
   courseRecords?: Prisma.CourseRecordListRelationFilter
+  visitors?: Prisma.VisitorListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -324,6 +325,7 @@ export type UserOrderByWithRelationInput = {
   wordBookRecords?: Prisma.WordBookRecordOrderByRelationAggregateInput
   paymentRecords?: Prisma.PaymentRecordOrderByRelationAggregateInput
   courseRecords?: Prisma.CourseRecordOrderByRelationAggregateInput
+  visitors?: Prisma.VisitorOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -348,6 +350,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   wordBookRecords?: Prisma.WordBookRecordListRelationFilter
   paymentRecords?: Prisma.PaymentRecordListRelationFilter
   courseRecords?: Prisma.CourseRecordListRelationFilter
+  visitors?: Prisma.VisitorListRelationFilter
 }, "id" | "email" | "phone">
 
 export type UserOrderByWithAggregationInput = {
@@ -413,6 +416,7 @@ export type UserCreateInput = {
   wordBookRecords?: Prisma.WordBookRecordCreateNestedManyWithoutUserInput
   paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutUserInput
   courseRecords?: Prisma.CourseRecordCreateNestedManyWithoutUserInput
+  visitors?: Prisma.VisitorCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -434,6 +438,7 @@ export type UserUncheckedCreateInput = {
   wordBookRecords?: Prisma.WordBookRecordUncheckedCreateNestedManyWithoutUserInput
   paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutUserInput
   courseRecords?: Prisma.CourseRecordUncheckedCreateNestedManyWithoutUserInput
+  visitors?: Prisma.VisitorUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -455,6 +460,7 @@ export type UserUpdateInput = {
   wordBookRecords?: Prisma.WordBookRecordUpdateManyWithoutUserNestedInput
   paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutUserNestedInput
   courseRecords?: Prisma.CourseRecordUpdateManyWithoutUserNestedInput
+  visitors?: Prisma.VisitorUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -476,6 +482,7 @@ export type UserUncheckedUpdateInput = {
   wordBookRecords?: Prisma.WordBookRecordUncheckedUpdateManyWithoutUserNestedInput
   paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutUserNestedInput
   courseRecords?: Prisma.CourseRecordUncheckedUpdateManyWithoutUserNestedInput
+  visitors?: Prisma.VisitorUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -601,6 +608,11 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
+}
+
 export type StringFieldUpdateOperationsInput = {
   set?: string
 }
@@ -671,6 +683,22 @@ export type UserUpdateOneRequiredWithoutCourseRecordsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCourseRecordsInput, Prisma.UserUpdateWithoutCourseRecordsInput>, Prisma.UserUncheckedUpdateWithoutCourseRecordsInput>
 }
 
+export type UserCreateNestedOneWithoutVisitorsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutVisitorsInput, Prisma.UserUncheckedCreateWithoutVisitorsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutVisitorsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutVisitorsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutVisitorsInput, Prisma.UserUncheckedCreateWithoutVisitorsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutVisitorsInput
+  upsert?: Prisma.UserUpsertWithoutVisitorsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutVisitorsInput, Prisma.UserUpdateWithoutVisitorsInput>, Prisma.UserUncheckedUpdateWithoutVisitorsInput>
+}
+
 export type UserCreateWithoutWordBookRecordsInput = {
   id?: string
   name: string
@@ -689,6 +717,7 @@ export type UserCreateWithoutWordBookRecordsInput = {
   lastLoginAt?: Date | string | null
   paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutUserInput
   courseRecords?: Prisma.CourseRecordCreateNestedManyWithoutUserInput
+  visitors?: Prisma.VisitorCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutWordBookRecordsInput = {
@@ -709,6 +738,7 @@ export type UserUncheckedCreateWithoutWordBookRecordsInput = {
   lastLoginAt?: Date | string | null
   paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutUserInput
   courseRecords?: Prisma.CourseRecordUncheckedCreateNestedManyWithoutUserInput
+  visitors?: Prisma.VisitorUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutWordBookRecordsInput = {
@@ -745,6 +775,7 @@ export type UserUpdateWithoutWordBookRecordsInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutUserNestedInput
   courseRecords?: Prisma.CourseRecordUpdateManyWithoutUserNestedInput
+  visitors?: Prisma.VisitorUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWordBookRecordsInput = {
@@ -765,6 +796,7 @@ export type UserUncheckedUpdateWithoutWordBookRecordsInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutUserNestedInput
   courseRecords?: Prisma.CourseRecordUncheckedUpdateManyWithoutUserNestedInput
+  visitors?: Prisma.VisitorUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPaymentRecordsInput = {
@@ -785,6 +817,7 @@ export type UserCreateWithoutPaymentRecordsInput = {
   lastLoginAt?: Date | string | null
   wordBookRecords?: Prisma.WordBookRecordCreateNestedManyWithoutUserInput
   courseRecords?: Prisma.CourseRecordCreateNestedManyWithoutUserInput
+  visitors?: Prisma.VisitorCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPaymentRecordsInput = {
@@ -805,6 +838,7 @@ export type UserUncheckedCreateWithoutPaymentRecordsInput = {
   lastLoginAt?: Date | string | null
   wordBookRecords?: Prisma.WordBookRecordUncheckedCreateNestedManyWithoutUserInput
   courseRecords?: Prisma.CourseRecordUncheckedCreateNestedManyWithoutUserInput
+  visitors?: Prisma.VisitorUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPaymentRecordsInput = {
@@ -841,6 +875,7 @@ export type UserUpdateWithoutPaymentRecordsInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   wordBookRecords?: Prisma.WordBookRecordUpdateManyWithoutUserNestedInput
   courseRecords?: Prisma.CourseRecordUpdateManyWithoutUserNestedInput
+  visitors?: Prisma.VisitorUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPaymentRecordsInput = {
@@ -861,6 +896,7 @@ export type UserUncheckedUpdateWithoutPaymentRecordsInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   wordBookRecords?: Prisma.WordBookRecordUncheckedUpdateManyWithoutUserNestedInput
   courseRecords?: Prisma.CourseRecordUncheckedUpdateManyWithoutUserNestedInput
+  visitors?: Prisma.VisitorUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCourseRecordsInput = {
@@ -881,6 +917,7 @@ export type UserCreateWithoutCourseRecordsInput = {
   lastLoginAt?: Date | string | null
   wordBookRecords?: Prisma.WordBookRecordCreateNestedManyWithoutUserInput
   paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutUserInput
+  visitors?: Prisma.VisitorCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCourseRecordsInput = {
@@ -901,6 +938,7 @@ export type UserUncheckedCreateWithoutCourseRecordsInput = {
   lastLoginAt?: Date | string | null
   wordBookRecords?: Prisma.WordBookRecordUncheckedCreateNestedManyWithoutUserInput
   paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutUserInput
+  visitors?: Prisma.VisitorUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCourseRecordsInput = {
@@ -937,6 +975,7 @@ export type UserUpdateWithoutCourseRecordsInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   wordBookRecords?: Prisma.WordBookRecordUpdateManyWithoutUserNestedInput
   paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutUserNestedInput
+  visitors?: Prisma.VisitorUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCourseRecordsInput = {
@@ -957,6 +996,107 @@ export type UserUncheckedUpdateWithoutCourseRecordsInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   wordBookRecords?: Prisma.WordBookRecordUncheckedUpdateManyWithoutUserNestedInput
   paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutUserNestedInput
+  visitors?: Prisma.VisitorUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutVisitorsInput = {
+  id?: string
+  name: string
+  email?: string | null
+  phone: string
+  address?: string | null
+  password: string
+  avatar?: string | null
+  bio?: string | null
+  isTimingTask?: boolean
+  timingTaskTime?: string | null
+  wordNumber?: number
+  dayNumber?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lastLoginAt?: Date | string | null
+  wordBookRecords?: Prisma.WordBookRecordCreateNestedManyWithoutUserInput
+  paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutUserInput
+  courseRecords?: Prisma.CourseRecordCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutVisitorsInput = {
+  id?: string
+  name: string
+  email?: string | null
+  phone: string
+  address?: string | null
+  password: string
+  avatar?: string | null
+  bio?: string | null
+  isTimingTask?: boolean
+  timingTaskTime?: string | null
+  wordNumber?: number
+  dayNumber?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lastLoginAt?: Date | string | null
+  wordBookRecords?: Prisma.WordBookRecordUncheckedCreateNestedManyWithoutUserInput
+  paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutUserInput
+  courseRecords?: Prisma.CourseRecordUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutVisitorsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutVisitorsInput, Prisma.UserUncheckedCreateWithoutVisitorsInput>
+}
+
+export type UserUpsertWithoutVisitorsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutVisitorsInput, Prisma.UserUncheckedUpdateWithoutVisitorsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutVisitorsInput, Prisma.UserUncheckedCreateWithoutVisitorsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutVisitorsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutVisitorsInput, Prisma.UserUncheckedUpdateWithoutVisitorsInput>
+}
+
+export type UserUpdateWithoutVisitorsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isTimingTask?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  timingTaskTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wordNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  dayNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wordBookRecords?: Prisma.WordBookRecordUpdateManyWithoutUserNestedInput
+  paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutUserNestedInput
+  courseRecords?: Prisma.CourseRecordUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutVisitorsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isTimingTask?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  timingTaskTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wordNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  dayNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wordBookRecords?: Prisma.WordBookRecordUncheckedUpdateManyWithoutUserNestedInput
+  paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutUserNestedInput
+  courseRecords?: Prisma.CourseRecordUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -968,12 +1108,14 @@ export type UserCountOutputType = {
   wordBookRecords: number
   paymentRecords: number
   courseRecords: number
+  visitors: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   wordBookRecords?: boolean | UserCountOutputTypeCountWordBookRecordsArgs
   paymentRecords?: boolean | UserCountOutputTypeCountPaymentRecordsArgs
   courseRecords?: boolean | UserCountOutputTypeCountCourseRecordsArgs
+  visitors?: boolean | UserCountOutputTypeCountVisitorsArgs
 }
 
 /**
@@ -1007,6 +1149,13 @@ export type UserCountOutputTypeCountCourseRecordsArgs<ExtArgs extends runtime.Ty
   where?: Prisma.CourseRecordWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountVisitorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VisitorWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1027,6 +1176,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   wordBookRecords?: boolean | Prisma.User$wordBookRecordsArgs<ExtArgs>
   paymentRecords?: boolean | Prisma.User$paymentRecordsArgs<ExtArgs>
   courseRecords?: boolean | Prisma.User$courseRecordsArgs<ExtArgs>
+  visitors?: boolean | Prisma.User$visitorsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1089,6 +1239,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   wordBookRecords?: boolean | Prisma.User$wordBookRecordsArgs<ExtArgs>
   paymentRecords?: boolean | Prisma.User$paymentRecordsArgs<ExtArgs>
   courseRecords?: boolean | Prisma.User$courseRecordsArgs<ExtArgs>
+  visitors?: boolean | Prisma.User$visitorsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1100,6 +1251,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     wordBookRecords: Prisma.$WordBookRecordPayload<ExtArgs>[]
     paymentRecords: Prisma.$PaymentRecordPayload<ExtArgs>[]
     courseRecords: Prisma.$CourseRecordPayload<ExtArgs>[]
+    visitors: Prisma.$VisitorPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1514,6 +1666,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   wordBookRecords<T extends Prisma.User$wordBookRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$wordBookRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WordBookRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   paymentRecords<T extends Prisma.User$paymentRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$paymentRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   courseRecords<T extends Prisma.User$courseRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$courseRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CourseRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  visitors<T extends Prisma.User$visitorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$visitorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VisitorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2020,6 +2173,30 @@ export type User$courseRecordsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.CourseRecordScalarFieldEnum | Prisma.CourseRecordScalarFieldEnum[]
+}
+
+/**
+ * User.visitors
+ */
+export type User$visitorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Visitor
+   */
+  select?: Prisma.VisitorSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Visitor
+   */
+  omit?: Prisma.VisitorOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VisitorInclude<ExtArgs> | null
+  where?: Prisma.VisitorWhereInput
+  orderBy?: Prisma.VisitorOrderByWithRelationInput | Prisma.VisitorOrderByWithRelationInput[]
+  cursor?: Prisma.VisitorWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VisitorScalarFieldEnum | Prisma.VisitorScalarFieldEnum[]
 }
 
 /**

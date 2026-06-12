@@ -7,6 +7,7 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { MinioModule } from "./minio/minio.module";
 import { PayModule } from "./pay/pay.module";
 import { EmailModule } from "./email/email.module";
+import { BullModule } from "@nestjs/bullmq";
 
 @Global()
 @Module({
@@ -27,6 +28,16 @@ import { EmailModule } from "./email/email.module";
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: ".env",
+    }),
+    BullModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        connection: {
+          host: configService.get("REDIS_HOST"),
+          port: Number(configService.get("REDIS_PORT")),
+        },
+      }),
     }),
     JwtModule.registerAsync({
       imports: [ConfigModule],

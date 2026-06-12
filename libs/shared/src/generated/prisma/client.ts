@@ -69,3 +69,28 @@ export type CourseRecord = Prisma.CourseRecordModel
  * 
  */
 export type Course = Prisma.CourseModel
+/**
+ * Model Visitor
+ * 
+ */
+export type Visitor = Prisma.VisitorModel
+/**
+ * Model PageView
+ * 
+ */
+export type PageView = Prisma.PageViewModel
+/**
+ * Model TrackEvent
+ * 
+ */
+export type TrackEvent = Prisma.TrackEventModel
+/**
+ * Model PerformanceEntry
+ * 
+ */
+export type PerformanceEntry = Prisma.PerformanceEntryModel
+/**
+ * Model ErrorEntry
+ * 
+ */
+export type ErrorEntry = Prisma.ErrorEntryModel
