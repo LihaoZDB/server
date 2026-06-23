@@ -20,8 +20,8 @@ export class EmailService implements OnModuleInit {
 
     this.sendEmail(
       "2572873054@qq.com",
-      "Test Email",
-      "This is a test email sent from NestJS.",
+      "测试邮件",
+      "这是一封测试邮件，收到后你将拥有好运气！",
     );
   }
 
