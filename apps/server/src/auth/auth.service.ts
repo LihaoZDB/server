@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { TokenPayload, RefreshTokenPayload, Token } from "@en/common/user";
+import type { TokenPayload, RefreshTokenPayload, Token } from "@en/common/user";
 @Injectable()
 export class AuthService {
   constructor(private readonly jwtService: JwtService) {}

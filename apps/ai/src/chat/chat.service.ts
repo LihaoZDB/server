@@ -7,7 +7,7 @@ import {
   createDeepSeekReasoner,
 } from "../llm/llm.config";
 import { PostgresSaver } from "@langchain/langgraph-checkpoint-postgres";
-import { ChatDto, ChatRoleType } from "@en/common/chat";
+import type { ChatDto, ChatRoleType } from "@en/common/chat";
 import type { AIMessageChunk, ReactAgent } from "langchain";
 import { chatMode } from "../prompt/prompt.mode";
 import { createAgent } from "langchain";

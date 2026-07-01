@@ -6,7 +6,7 @@ import {
   PayService as SharedPayService,
   ResponseService,
 } from "@libs/shared";
-import * as nanoid from "nanoid";
+import { randomBytes } from "node:crypto";
 import dayjs from "dayjs";
 import { ConfigService } from "@nestjs/config";
 import { Request } from "express";
@@ -24,7 +24,7 @@ export class PayService {
   ) {}
   private createTradeNo() {
     const prifix = "XM";
-    return `${prifix}-${nanoid.nanoid(12)}`;
+    return `${prifix}-${randomBytes(6).toString("hex").toUpperCase()}`;
   }
   async create(createPayDto: CreatePayDto, user: TokenPayload) {
     // 已经购买过的课程不可以重复购买

@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService, ResponseService } from "@libs/shared";
-import {
+import type {
   UvDto,
   PerformanceDto,
   PvDto,
@@ -38,6 +38,7 @@ export class TrackerService {
     return this.responseService.success(visitor.id);
   }
   async updateUv(body: UpdateUvDto) {
+    if (!body.visitorId) return this.responseService.success(false);
     await this.prismaService.visitor.update({
       where: { id: body.visitorId },
       data: {
@@ -47,6 +48,7 @@ export class TrackerService {
     return this.responseService.success(true);
   }
   async performance(body: PerformanceDto) {
+    if (!body.visitorId) return this.responseService.success(false);
     await this.prismaService.performanceEntry.create({
       data: {
         visitorId: body.visitorId,
@@ -60,7 +62,7 @@ export class TrackerService {
     return this.responseService.success(true);
   }
   async pv(body: PvDto) {
-    console.log(body);
+    if (!body.visitorId) return this.responseService.success(false);
     await this.prismaService.pageView.create({
       data: {
         visitorId: body.visitorId,
@@ -72,6 +74,7 @@ export class TrackerService {
     return this.responseService.success(true);
   }
   async event(body: EventDto) {
+    if (!body.visitorId) return this.responseService.success(false);
     await this.prismaService.trackEvent.create({
       data: {
         visitorId: body.visitorId,
@@ -83,6 +86,7 @@ export class TrackerService {
     return this.responseService.success(true);
   }
   async error(body: ErrorDto) {
+    if (!body.visitorId) return this.responseService.success(false);
     await this.prismaService.errorEntry.create({
       data: {
         visitorId: body.visitorId,

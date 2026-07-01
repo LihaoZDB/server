@@ -4,7 +4,6 @@ import dayjs from "dayjs";
 import { createAgent } from "langchain";
 import { createDeepSeek } from "../llm/llm.config";
 import { tool } from "@langchain/core/tools";
-import marked from "marked";
 import { Queue } from "bullmq"; // 类型
 import { digestQueueName } from "./digest.queue";
 import { InjectQueue } from "@nestjs/bullmq";
@@ -115,6 +114,7 @@ export class DigestService implements OnModuleInit {
       const content = result.messages.at(-1)?.content;
 
       if (content) {
+        const { marked } = await import("marked");
         const html = await marked.parse(content as string);
         const [hour, minute, second] = user
           .timingTaskTime!.split(":")
