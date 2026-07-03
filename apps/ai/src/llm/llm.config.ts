@@ -40,7 +40,7 @@ export const createCheckpoint = async () => {
 // 初始化博查api搜索
 export const createBoChaSearch = async (query: string, count: number = 10) => {
   const configService = new ConfigService();
-  const result = await fetch(configService.get<string>("BOCHA_API_URL")!, {
+  const result = await fetch(configService.get<string>("BOCHA_SEARCH_URL")!, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

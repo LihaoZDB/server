@@ -70,40 +70,56 @@ export class PayService {
       return {
         payUrl,
         timeExpire: dateTime.toDate().getTime(),
+        outTradeNo,
       };
     });
     return this.responseService.success(result);
   }
 
   async notify(req: Request) {
-    const body = JSON.parse(req.body.body) as {
-      courseId: string;
-      userId: string;
-    };
-    await this.prismaService.$transaction(async (tx) => {
-      // 1.更新支付记录
-      const paymentRecord = await tx.paymentRecord.update({
-        where: {
-          outTradeNo: req.body.out_trade_no, // 订单编号
-        },
-        data: {
-          tradeNo: req.body.trade_no, // 支付宝订单号
-          tradeStatus: TradeStatus.TRADE_SUCCESS, // 支付状态
-          sendPayTime: dayjs(req.body.gmt_payment).toDate(), // 支付时间
-        },
+    console.log("[Pay] 收到支付宝回调", req.body);
+    try {
+      const body =
+        typeof req.body.body === "string"
+          ? (JSON.parse(req.body.body) as { courseId: string; userId: string })
+          : (req.body.body as { courseId: string; userId: string });
+      await this.prismaService.$transaction(async (tx) => {
+        // 1.更新支付记录
+        const paymentRecord = await tx.paymentRecord.update({
+          where: {
+            outTradeNo: req.body.out_trade_no, // 订单编号
+          },
+          data: {
+            tradeNo: req.body.trade_no, // 支付宝订单号
+            tradeStatus: TradeStatus.TRADE_SUCCESS, // 支付状态
+            sendPayTime: dayjs(req.body.gmt_payment).toDate(), // 支付时间
+          },
+        });
+        // 2.创建我的课程
+        await tx.courseRecord.create({
+          data: {
+            userId: body.userId,
+            courseId: body.courseId,
+            isPurchased: true, // 是否购买
+            paymentRecordId: paymentRecord.id, // 支付记录ID
+          },
+        });
+        // 通知前端socket
+        console.log("[Pay] 发送支付成功事件到用户:", body.userId);
+        this.socketGateway.emitPaymentSuccess(body.userId);
       });
-      // 2.创建我的课程
-      await tx.courseRecord.create({
-        data: {
-          userId: body.userId,
-          courseId: body.courseId,
-          isPurchased: true, // 是否购买
-          paymentRecordId: paymentRecord.id, // 支付记录ID
-        },
-      });
-      // 通知前端socket
-      this.socketGateway.emitPaymentSuccess(body.userId);
+      return true;
+    } catch (error) {
+      console.error("[Pay] 回调处理失败", error);
+      return false;
+    }
+  }
+
+  async getStatus(outTradeNo: string) {
+    const record = await this.prismaService.paymentRecord.findUnique({
+      where: { outTradeNo },
+      select: { tradeStatus: true },
     });
-    return true;
+    return this.responseService.success(record?.tradeStatus ?? null);
   }
 }

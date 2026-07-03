@@ -31,4 +31,10 @@ export class PayController {
   notify(@Req() req: Request) {
     return this.payService.notify(req);
   }
+
+  @UseGuards(AuthGuard)
+  @Get("status/:outTradeNo")
+  status(@Param("outTradeNo") outTradeNo: string) {
+    return this.payService.getStatus(outTradeNo);
+  }
 }
