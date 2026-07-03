@@ -4,9 +4,15 @@ import { VersioningType } from "@nestjs/common";
 import { InterceptorInterceptor } from "@libs/shared/interceptor/interceptor";
 import { InterceptorExceptionFilter } from "@libs/shared/interceptor/exceptionFilter";
 import { Config } from "@en/config";
+import { ConfigService } from "@nestjs/config";
+import { RedisIoAdapter } from "./socket/redis-io.adapter";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const configService = app.get(ConfigService);
+  const redisIoAdapter = new RedisIoAdapter(app, configService);
+  redisIoAdapter.connectToRedis();
+  app.useWebSocketAdapter(redisIoAdapter);
   app.useGlobalInterceptors(new InterceptorInterceptor());
   app.useGlobalFilters(new InterceptorExceptionFilter());
   app.setGlobalPrefix("api"); // 设置全局路由前缀
