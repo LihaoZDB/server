@@ -114,12 +114,4 @@ export class PayService {
       return false;
     }
   }
-
-  async getStatus(outTradeNo: string) {
-    const record = await this.prismaService.paymentRecord.findUnique({
-      where: { outTradeNo },
-      select: { tradeStatus: true },
-    });
-    return this.responseService.success(record?.tradeStatus ?? null);
-  }
 }

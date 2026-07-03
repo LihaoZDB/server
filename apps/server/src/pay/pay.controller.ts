@@ -1,11 +1,7 @@
 import {
   Controller,
-  Get,
   Post,
   Body,
-  Patch,
-  Param,
-  Delete,
   UseGuards,
   Req,
   All,
@@ -30,11 +26,5 @@ export class PayController {
   @All("notify")
   notify(@Req() req: Request) {
     return this.payService.notify(req);
-  }
-
-  @UseGuards(AuthGuard)
-  @Get("status/:outTradeNo")
-  status(@Param("outTradeNo") outTradeNo: string) {
-    return this.payService.getStatus(outTradeNo);
   }
 }
