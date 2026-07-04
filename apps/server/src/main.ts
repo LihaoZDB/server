@@ -11,7 +11,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
   const redisIoAdapter = new RedisIoAdapter(app, configService);
-  redisIoAdapter.connectToRedis();
+  await redisIoAdapter.connectToRedis();
   app.useWebSocketAdapter(redisIoAdapter);
   app.useGlobalInterceptors(new InterceptorInterceptor());
   app.useGlobalFilters(new InterceptorExceptionFilter());

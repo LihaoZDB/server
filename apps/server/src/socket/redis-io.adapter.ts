@@ -15,13 +15,21 @@ export class RedisIoAdapter extends IoAdapter {
     super(app);
   }
 
-  connectToRedis() {
+  async connectToRedis() {
+    const enabled = this.configService.get<string>("SOCKET_REDIS_ENABLED");
+    if (enabled !== "true") {
+      console.log("[Socket] Redis adapter disabled");
+      return;
+    }
+
     const host = this.configService.get<string>("REDIS_HOST") ?? "localhost";
     const port = Number(this.configService.get<string>("REDIS_PORT") ?? 6379);
     const password = this.configService.get<string>("REDIS_PASSWORD");
     const redisOptions = {
       host,
       port,
+      lazyConnect: true,
+      maxRetriesPerRequest: 1,
       ...(password ? { password } : {}),
     };
     const pubClient = new Redis(redisOptions);
@@ -34,8 +42,18 @@ export class RedisIoAdapter extends IoAdapter {
       console.error("[Socket] Redis sub client error", error);
     });
 
-    this.adapterConstructor = createAdapter(pubClient, subClient);
-    console.log(`[Socket] Redis adapter enabled: ${host}:${port}`);
+    try {
+      await Promise.all([pubClient.connect(), subClient.connect()]);
+      this.adapterConstructor = createAdapter(pubClient, subClient);
+      console.log(`[Socket] Redis adapter enabled: ${host}:${port}`);
+    } catch (error) {
+      pubClient.disconnect();
+      subClient.disconnect();
+      console.warn(
+        `[Socket] Redis adapter unavailable, fallback to single-process socket rooms: ${host}:${port}`,
+        error,
+      );
+    }
   }
 
   createIOServer(port: number, options?: ServerOptions) {
