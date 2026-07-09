@@ -11,9 +11,10 @@ import { PayModule } from './pay/pay.module';
 import { SocketModule } from './socket/socket.module';
 import { LearnModule } from './learn/learn.module';
 import { TrackerModule } from './tracker/tracker.module';
+import { QianhaiModule } from './qianhai/qianhai.module';
 
 @Module({
-  imports: [UserModule, SharedModule, WordBookModule, AuthModule, CourseModule, PayModule, SocketModule, LearnModule, TrackerModule],
+  imports: [UserModule, SharedModule, WordBookModule, AuthModule, CourseModule, PayModule, SocketModule, LearnModule, TrackerModule, QianhaiModule],
   controllers: [AppController],
   providers: [AppService, AuthService],
 })

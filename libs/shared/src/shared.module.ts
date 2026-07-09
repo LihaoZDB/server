@@ -27,7 +27,7 @@ import { BullModule } from "@nestjs/bullmq";
     ResponseModule,
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: ".env",
+      envFilePath: `.env.${process.env.NODE_ENV || 'development'}`,
     }),
     BullModule.forRootAsync({
       imports: [ConfigModule],
